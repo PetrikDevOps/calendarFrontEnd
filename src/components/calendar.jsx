@@ -15,16 +15,6 @@ const Calendar = (id) => {
         })
     }, []);
 
-    const handleClick = (day) => {
-        const newMsgs = msgs.map(msg => {
-            if (msg.day === day) {
-                msg.open = !msg.open;
-            }
-            return msg;
-        });
-        setMsgs(newMsgs);
-    }
-
     return (
         <div>
             <h1>Calendar</h1>
