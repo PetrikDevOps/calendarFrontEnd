@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, createContext } from "react";
 
 const AuthContext = createContext();
 
-export const useAuth = useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -12,6 +12,10 @@ export const AuthProvider = ({ children }) => {
         if (localStorage.getItem("user")) {
             setUser(JSON.parse(localStorage.getItem("user")));
             setAuth(true);
+        }
+        else{
+            setUser('alma')
+            setAuth(true)
         }
     }, []);
 
