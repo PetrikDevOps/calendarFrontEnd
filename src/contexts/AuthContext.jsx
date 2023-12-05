@@ -8,14 +8,19 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [auth, setAuth] = useState(false);
 
+
     useEffect(() => {
-        if (localStorage.getItem("user")) {
-            setUser(JSON.parse(localStorage.getItem("user")));
+        const defaultUser = {
+            username: 'Guest',
+            email: 'guest@guest.com',
+            password: 'guest'
+        };
+        localStorage.setItem("user", JSON.stringify(defaultUser));
+        //kitörlendő a tetejéről
+        const _user = JSON.parse(localStorage.getItem("user"));
+        if (_user) {
+            setUser(_user);
             setAuth(true);
-        }
-        else{
-            setUser('alma')
-            setAuth(true)
         }
     }, []);
 
