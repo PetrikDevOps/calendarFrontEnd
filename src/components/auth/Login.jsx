@@ -24,6 +24,7 @@ const Login = () => {
 				if (res.data.Success) window.location.reload();
 			})
 			.catch((err) => {
+				console.log(err.response.data.err);
 				console.error(err.response.data.Error);
 			});
 

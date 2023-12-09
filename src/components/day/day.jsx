@@ -12,7 +12,18 @@ const Day = (props) => {
 	const [msg, setMsg] = useState('');
 
 	const getDay = () => {
-		api.get('/calendar', { id: user.id, day: props.day })
+		api.post('/calendarGet', { id: user.id, day: props.day })
+			.then(({ data }) => {
+				setOpen(data.open);
+				setMsg(data.msg);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const openDay = () => {
+		api.post('/calendarOpen', { id: user.id, day: props.day })
 			.then(({ data }) => {
 				setOpen(data.open);
 				setMsg(data.msg);
@@ -30,14 +41,13 @@ const Day = (props) => {
 		return (
 			<DayButtonClosed
 				day={props.day}
-				handleClick={getDay}
+				handleClick={openDay}
 			/>
 		);
 	} else {
 		return (
 			<DayButtonOpen
 				msg={msg}
-				handleClick={getDay}
 			/>
 		);
 	}
