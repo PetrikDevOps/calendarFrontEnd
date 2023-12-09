@@ -2,20 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import api from '../../config/api';
 
-import DayButtonOpen from './DayButtonOpen';
-import DayButtonClosed from './DayButtonClosed';
-
 //user id, day
 const Day = (props) => {
 	const { user } = useUser();
-	const [open, setOpen] = useState(true);
-	const [msg, setMsg] = useState('');
+	const [open, setOpen] = useState(false);
+	const [msg, setMsg] = useState(props.day);
 
-	const getDay = (openDay = false) => {
-		api.post('/calendar', { id: user.id, day: props.day, openDay })
+	const getDay = () => {
+		api.post('/getDay', { id: user.id, day: props.day })
 			.then(({ data }) => {
-				setOpen(data.open);
-				setMsg(data.msg);
+				if (data == true){
+					openDay();
+				}
+				console.log(data);
+				setOpen(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const openDay = () => {
+		if (open) return;
+		api.post('/openDay', { id: user.id, day: props.day })
+			.then(({ data }) => {
+				setMsg(data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -26,16 +37,8 @@ const Day = (props) => {
 		getDay();
 	}, []);
 
-	if (!open) {
-		return (
-			<DayButtonClosed
-				day={props.day}
-				handleClick={getDay(true)}
-			/>
-		);
-	} else {
-		return <DayButtonOpen msg={msg} />;
-	}
+	return <div onClick={openDay}>{msg}</div>;
+
 };
 
 export default Day;

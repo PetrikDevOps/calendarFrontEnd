@@ -2,7 +2,7 @@ import Day from './day/Day';
 
 const Calendar = () => {
 	const days = [];
-	for (let i = 0; i < 24; i++) {
+	for (let i = 1; i < 25; i++) {
 		days.push(
 			<Day
 				key={i}
