@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
 				if (res.data.Success) {
 					const { id, username, email } = res.data.user;
 					setUser({
-						userId: id,
+						id,
 						username,
 						email,
 					});
