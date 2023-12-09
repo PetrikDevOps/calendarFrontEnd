@@ -2,7 +2,7 @@ import React, { useState, useContext, createContext } from 'react';
 
 const AuthPageContext = createContext();
 
-export const useAuth = () => useContext(AuthPageContext);
+export const useAuthPage = () => useContext(AuthPageContext);
 
 const AuthPageProvider = ({ children }) => {
 	const [isRegister, setIsRegister] = useState(false);
