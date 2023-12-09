@@ -1,48 +1,43 @@
-import React, { useEffect } from 'react';
-import DayButtonClosed from './dayButtonClosed';
-import DayButtonOpen from './dayButtonOpen';
-
+import React, { useEffect, useState } from 'react';
+import { useUser } from '../../contexts/UserContext';
 import api from '../../config/api';
-import { useState } from 'react';
+
+import DayButtonOpen from './DayButtonOpen';
+import DayButtonClosed from './DayButtonClosed';
+
 //user id, day
 const Day = (props) => {
+	const { user } = useUser();
 	const [open, setOpen] = useState(true);
 	const [msg, setMsg] = useState('');
 
-	useEffect(() => {
-		api.get(`/api/calendar/?id=${props.user}+day=${props.day}`)
-			.then((res) => {
-				setOpen(res.data.open);
-				setMsg(res.data.msg);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
-
-	const handleClick = () => {
-		api.get(`/api/calendar/open/?id=${props.user}+day=${props.day}`)
-			.then((res) => {
-				setOpen(res.data.open);
-				setMsg(res.data.msg);
+	const getDay = () => {
+		api.get('/calendar', { id: user.id, day: props.day })
+			.then(({ data }) => {
+				setOpen(data.open);
+				setMsg(data.msg);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
 
+	useEffect(() => {
+		getDay();
+	}, []);
+
 	if (!open) {
 		return (
 			<DayButtonClosed
 				day={props.day}
-				handleClick={handleClick}
+				handleClick={getDay}
 			/>
 		);
 	} else {
 		return (
 			<DayButtonOpen
 				msg={msg}
-				handleClick={handleClick}
+				handleClick={getDay}
 			/>
 		);
 	}

@@ -1,9 +1,14 @@
-import Day from './day/day';
+import Day from './day/Day';
 
-const Calendar = (id) => {
+const Calendar = () => {
 	const days = [];
 	for (let i = 0; i < 24; i++) {
-		// days.push(<Day key={i} day={i} user={!!USER HERE}/>)
+		days.push(
+			<Day
+				key={i}
+				day={i}
+			/>,
+		);
 	}
 
 	return <div>{days}</div>;
