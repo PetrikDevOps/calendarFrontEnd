@@ -11,11 +11,10 @@ const Day = (props) => {
 	const getDay = () => {
 		api.post('/getDay', { id: user.id, day: props.day })
 			.then(({ data }) => {
-				if (data == true){
-					openDay();
+                if (data.day == true){
+                    openDay();
 				}
-				console.log(data);
-				setOpen(data);
+                setOpen(data.day);                
 			})
 			.catch((err) => {
 				console.log(err);
@@ -26,7 +25,8 @@ const Day = (props) => {
 		if (open) return;
 		api.post('/openDay', { id: user.id, day: props.day })
 			.then(({ data }) => {
-				setMsg(data);
+                console.log(data.msg);
+				setMsg(data.msg);
 			})
 			.catch((err) => {
 				console.log(err);
