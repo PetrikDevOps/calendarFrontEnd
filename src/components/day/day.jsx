@@ -6,16 +6,8 @@ import api from '../../config/api';
 const Day = (props) => {
 	const { user } = useUser();
 	const [open, setOpen] = useState(false);
+	const [img, setImg] = useState('https://static.vecteezy.com/system/resources/previews/009/398/466/non_2x/present-box-clipart-design-illustration-free-png.png');
 	const [msg, setMsg] = useState(props.day);
-
-	const openImg = () => {
-		return (
-			<div className='flex flex-col justify-center items-center'>
-				<img src={`./img/${props.day}.jpg`} className='w-48 h-48' />
-				<div className='text-center text-white text-5xl'>{props.day}</div>
-			</div>
-		);
-	};
 
 	const getDay = () => {
 		api.post('/getDay', { id: user.id, day: props.day })
@@ -34,8 +26,7 @@ const Day = (props) => {
 		if (open) return;
 		api.post('/openDay', { id: user.id, day: props.day })
 			.then(({ data }) => {
-                console.log(data.msg);
-				setMsg(data.msg);
+				setImg(data.msg);
 				openImg()
 			})
 			.catch((err) => {
@@ -47,7 +38,7 @@ const Day = (props) => {
 		getDay();
 	}, []);
 
-	return <div className='static self-center justify-self-center bg-red-900 h-15 w-48 text-center text-white text-5xl overflow-hidden' onClick={openDay}>{msg}<img src='https://core.co.za/cdn/shop/t/17/assets/mac.png?v=42405330336985380711677574297' className='absolute bottom-50 left-50 w-12 h-12'></img></div>;
+	return <div className='relative self-center justify-self-center bg-red-900 h-15 w-48 text-center text-white text-5xl rounded-lg' onClick={openDay}>{msg}<img src={img} className='absolute left-[80%] top-[20%] h-16'></img></div>;
 
 };
 
