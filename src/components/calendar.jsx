@@ -1,4 +1,4 @@
-import Day from './day/Day';
+import Day from './day/day';
 
 const Calendar = () => {
 	const days = [];
@@ -11,7 +11,7 @@ const Calendar = () => {
 		);
 	}
 
-	return <div>{days}</div>;
+	return <div className='p-10 grid grid-cols-4 gap-4 bg-lime-900 w-9/12 h-5/6 rounded-lg'>{days}</div>;
 };
 
 export default Calendar;
