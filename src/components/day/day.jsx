@@ -42,7 +42,7 @@ const Day = (props) => {
 
 	return (
 		<div
-			className='h-15 relative w-48 self-center justify-self-center rounded-lg bg-red-900 py-4 text-center text-5xl text-white'
+			className='h-15 bg-golden relative w-48 self-center justify-self-center rounded-lg border border-gray-300 py-4 text-center text-5xl text-white'
 			onClick={openDay}
 		>
 			{msg}
