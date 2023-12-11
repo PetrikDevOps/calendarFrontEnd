@@ -8,7 +8,7 @@ const Input = ({ value, onChange, type, placeholder }) => {
 			type={type}
 			placeholder={placeholder}
 			required
-			className='mb-2 block w-full rounded-sm border p-2'
+			className='mb-2 block w-full rounded-sm border p-2 text-black'
 		/>
 	);
 };
