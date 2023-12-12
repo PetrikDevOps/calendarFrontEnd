@@ -2,7 +2,7 @@ import Calendar from '../components/calendar';
 
 const CalendarPage = () => {
 	return (
-		<div className='w-screen h-screen bg-slate-700 flex justify-center items-center'>
+		<div className='flex h-screen w-screen items-center justify-center bg-slate-700'>
 			<Calendar />
 		</div>
 	);
